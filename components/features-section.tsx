@@ -40,7 +40,7 @@ export function FeaturesSection() {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient-silver">Why Choose</span>{" "}
-            <span className="text-foreground">SilverKey Pro?</span>
+            <span className="text-foreground">Luxury Services?</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Discover the features that make us the #1 choice for software activation

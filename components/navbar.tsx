@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X, LogIn, UserPlus, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { GemstoneLogo } from "@/components/gemstone-logo"
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -14,10 +15,8 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-silver-dark flex items-center justify-center">
-              <span className="text-xl font-bold text-primary-foreground">S</span>
-            </div>
-            <span className="text-xl font-bold text-gradient-silver">SilverKey</span>
+            <GemstoneLogo className="w-10 h-10" />
+            <span className="text-xl font-bold text-gradient-silver">Luxury Services</span>
           </Link>
 
           {/* Desktop Navigation */}

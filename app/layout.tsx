@@ -19,7 +19,7 @@ const notoArabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: 'SilverKey Pro - Premium Software Activation Tool',
+  title: 'Luxury Services - Premium Software Activation Tool',
   description: 'Professional software activation and licensing tool with secure serial key management',
   generator: 'v0.app',
   icons: {

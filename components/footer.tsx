@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Send } from "lucide-react"
+import { GemstoneLogo } from "@/components/gemstone-logo"
 
 export function Footer() {
   return (
@@ -9,10 +10,8 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-silver-dark flex items-center justify-center">
-                <span className="text-xl font-bold text-primary-foreground">S</span>
-              </div>
-              <span className="text-xl font-bold text-gradient-silver">SilverKey</span>
+              <GemstoneLogo className="w-10 h-10" />
+              <span className="text-xl font-bold text-gradient-silver">Luxury Services</span>
             </Link>
             <p className="text-muted-foreground text-sm">
               Professional software activation tool trusted by thousands of users worldwide.
@@ -78,7 +77,7 @@ export function Footer() {
             <h4 className="text-foreground font-semibold mb-4">Connect</h4>
             <ul className="space-y-2">
               <li>
-                <a href="https://t.me/silverkey" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
+                <a href="https://t.me/luxuryservices" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2">
                   <Send className="w-4 h-4" />
                   Telegram Channel
                 </a>
@@ -90,7 +89,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="pt-8 border-t border-border/50 text-center">
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} SilverKey Pro Tool. All Rights Reserved.
+            © {new Date().getFullYear()} Luxury Services. All Rights Reserved.
           </p>
           <p className="text-muted-foreground/50 text-xs mt-2">
             Secure Registration • Version 2.0.0

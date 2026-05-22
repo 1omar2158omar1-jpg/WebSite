@@ -22,7 +22,7 @@ export function HeroSection() {
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-gradient-silver">SilverKey Pro</span>
+            <span className="text-gradient-silver">Luxury Services</span>
             <br />
             <span className="text-foreground">Premium Activation</span>
           </h1>
@@ -46,7 +46,7 @@ export function HeroSection() {
                 View Pricing
               </Button>
             </Link>
-            <Link href="https://t.me/silverkey" target="_blank">
+            <Link href="https://t.me/luxuryservices" target="_blank">
               <Button size="lg" variant="outline" className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 px-8 py-6 text-lg">
                 <Send className="w-5 h-5 mr-2" />
                 Telegram Channel

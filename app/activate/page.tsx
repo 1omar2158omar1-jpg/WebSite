@@ -86,7 +86,7 @@ export default function ActivatePage() {
               <div className="text-center">
                 <div className="glass rounded-xl p-6 mb-6">
                   <CheckCircle className="w-12 h-12 text-green-400 mx-auto mb-4" />
-                  <p className="text-foreground font-medium mb-2">Welcome to SilverKey Pro!</p>
+                  <p className="text-foreground font-medium mb-2">Welcome to Luxury Services!</p>
                   <p className="text-muted-foreground text-sm">Redirecting to dashboard...</p>
                 </div>
               </div>
