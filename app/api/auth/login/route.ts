@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
+import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken"
+import { findUserByEmail } from "@/lib/db"
 
-// Configuration for external Node.js server
-const EXTERNAL_API_URL = process.env.EXTERNAL_API_URL || "http://localhost:3001"
+const JWT_SECRET = process.env.JWT_SECRET || "luxury-services-secret-key"
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,54 +18,65 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Forward request to external Node.js server
-    const response = await fetch(`${EXTERNAL_API_URL}/api/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
+    // Find user by email
+    const user = await findUserByEmail(email)
+    if (!user) {
       return NextResponse.json(
-        { success: false, message: data.message || "Login failed" },
-        { status: response.status }
+        { success: false, message: "Invalid email or password" },
+        { status: 401 }
       )
     }
 
-    // Create response with cookie
-    const responseData = NextResponse.json({
-      success: true,
-      message: "Login successful",
-      user: data.user,
-    })
-
-    // Set auth token as HTTP-only cookie if provided
-    if (data.token) {
-      responseData.cookies.set("auth_token", data.token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7, // 7 days
-      })
+    // Verify password
+    const isValidPassword = await bcrypt.compare(password, user.password)
+    if (!isValidPassword) {
+      return NextResponse.json(
+        { success: false, message: "Invalid email or password" },
+        { status: 401 }
+      )
     }
 
-    return responseData
-  } catch (error) {
-    console.error("Login error:", error)
-    
-    // For demo purposes, return success if external server is not available
-    return NextResponse.json({
+    // Check if user is banned
+    if (user.status === "banned") {
+      return NextResponse.json(
+        { success: false, message: "Your account has been suspended" },
+        { status: 403 }
+      )
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      JWT_SECRET,
+      { expiresIn: "7d" }
+    )
+
+    // Create response with cookie
+    const response = NextResponse.json({
       success: true,
-      message: "Login successful (demo mode)",
+      message: "Login successful",
       user: {
-        id: "demo-user",
-        email: "demo@example.com",
-        status: "active",
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        status: user.status,
       },
     })
+
+    // Set auth token as HTTP-only cookie
+    response.cookies.set("auth_token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    })
+
+    return response
+  } catch (error) {
+    console.error("Login error:", error)
+    return NextResponse.json(
+      { success: false, message: "Login failed. Please try again." },
+      { status: 500 }
+    )
   }
 }

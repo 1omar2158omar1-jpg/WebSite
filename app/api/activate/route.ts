@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
+import jwt from "jsonwebtoken"
+import { 
+  findSerialKey, 
+  useSerialKey, 
+  createSubscription, 
+  updateUserStatus,
+  findUserById 
+} from "@/lib/db"
 
-// Configuration for external Node.js server
-const EXTERNAL_API_URL = process.env.EXTERNAL_API_URL || "http://localhost:3001"
+const JWT_SECRET = process.env.JWT_SECRET || "luxury-services-secret-key"
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,43 +34,74 @@ export async function POST(request: NextRequest) {
 
     // Get auth token from cookie
     const authToken = request.cookies.get("auth_token")?.value
-
-    // Forward request to external Node.js server
-    const response = await fetch(`${EXTERNAL_API_URL}/api/activate`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(authToken && { Authorization: `Bearer ${authToken}` }),
-      },
-      body: JSON.stringify({ serialKey }),
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
+    if (!authToken) {
       return NextResponse.json(
-        { success: false, message: data.message || "Activation failed" },
-        { status: response.status }
+        { success: false, message: "Please login first" },
+        { status: 401 }
       )
     }
+
+    // Verify token and get user ID
+    let userId: number
+    try {
+      const decoded = jwt.verify(authToken, JWT_SECRET) as { userId: number }
+      userId = decoded.userId
+    } catch {
+      return NextResponse.json(
+        { success: false, message: "Invalid or expired session" },
+        { status: 401 }
+      )
+    }
+
+    // Find the serial key
+    const keyData = await findSerialKey(serialKey)
+    if (!keyData) {
+      return NextResponse.json(
+        { success: false, message: "Invalid serial key" },
+        { status: 400 }
+      )
+    }
+
+    // Check if key is available
+    if (keyData.status !== "available") {
+      return NextResponse.json(
+        { success: false, message: "This serial key has already been used" },
+        { status: 400 }
+      )
+    }
+
+    // Use the serial key
+    await useSerialKey(keyData.id, userId)
+
+    // Create subscription
+    await createSubscription(userId, keyData.plan_id, keyData.id, keyData.duration_days)
+
+    // Update user status to active
+    await updateUserStatus(userId, "active")
+
+    // Get user info
+    const user = await findUserById(userId)
+
+    // Calculate expiration date
+    const expiresAt = new Date()
+    expiresAt.setDate(expiresAt.getDate() + keyData.duration_days)
 
     return NextResponse.json({
       success: true,
       message: "Account activated successfully",
-      activationDetails: data.activationDetails,
+      activationDetails: {
+        plan: keyData.plan_name,
+        duration: keyData.duration_days,
+        activatedAt: new Date().toISOString(),
+        expiresAt: expiresAt.toISOString(),
+        username: user?.username,
+      },
     })
   } catch (error) {
     console.error("Activation error:", error)
-    
-    // For demo purposes, return success if external server is not available
-    return NextResponse.json({
-      success: true,
-      message: "Account activated successfully (demo mode)",
-      activationDetails: {
-        activatedAt: new Date().toISOString(),
-        expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
-        plan: "Premium",
-      },
-    })
+    return NextResponse.json(
+      { success: false, message: "Activation failed. Please try again." },
+      { status: 500 }
+    )
   }
 }

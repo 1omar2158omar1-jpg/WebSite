@@ -1,35 +1,41 @@
-import { RefreshCw, Headphones, Sparkles, Shield, Zap, Globe } from "lucide-react"
+import { Cloud, Smartphone, HardDrive, RefreshCw, Headphones, Sparkles } from "lucide-react"
 
 const features = [
   {
+    icon: Cloud,
+    title: "تخطي iCloud",
+    titleEn: "iCloud Bypass",
+    description: "Professional support guaranteed with regular updates for the latest iOS releases.",
+  },
+  {
+    icon: Smartphone,
+    title: "يدعم أحدث iOS",
+    titleEn: "Latest iOS Support",
+    description: "Professional support guaranteed with regular updates for the latest iOS releases.",
+  },
+  {
+    icon: HardDrive,
+    title: "بدون فقد البيانات",
+    titleEn: "No Data Loss",
+    description: "Professional support guaranteed with regular updates for the latest iOS releases.",
+  },
+  {
     icon: RefreshCw,
-    title: "Free Regular Updates",
-    description: "Professional support guaranteed with regular updates for the latest software releases.",
+    title: "تحديثات مجانية",
+    titleEn: "Free Updates",
+    description: "Professional support guaranteed with regular updates for the latest iOS releases.",
   },
   {
     icon: Headphones,
-    title: "24/7 Fast Support",
+    title: "دعم 24/7",
+    titleEn: "24/7 Support",
     description: "Our dedicated support team is available around the clock to assist you.",
   },
   {
     icon: Sparkles,
-    title: "Easy to Use Interface",
-    description: "Intuitive design that makes software activation simple and straightforward.",
-  },
-  {
-    icon: Shield,
-    title: "Secure & Reliable",
-    description: "Enterprise-grade security to protect your activations and data.",
-  },
-  {
-    icon: Zap,
-    title: "Fast & Efficient",
-    description: "Lightning-fast activation process that saves you time.",
-  },
-  {
-    icon: Globe,
-    title: "Global Support",
-    description: "Available worldwide with multi-language support and regional servers.",
+    title: "سهل الاستخدام",
+    titleEn: "Easy to Use",
+    description: "Intuitive design that makes the process simple and straightforward.",
   },
 ]
 
@@ -43,7 +49,7 @@ export function FeaturesSection() {
             <span className="text-foreground">Luxury Services?</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover the features that make us the #1 choice for software activation
+            Discover the features that make us the #1 choice for iCloud bypass
           </p>
         </div>
 
@@ -58,7 +64,10 @@ export function FeaturesSection() {
                   <feature.icon className="w-7 h-7 text-primary" />
                 </div>
                 <div className="w-12 h-1 bg-primary/50 rounded-full mb-4 group-hover:w-16 transition-all duration-300" />
-                <h3 className="text-xl font-semibold text-foreground mb-3">{feature.title}</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-1 text-right" dir="rtl">
+                  {feature.title}
+                </h3>
+                <h4 className="text-sm text-primary mb-3">{feature.titleEn}</h4>
                 <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
               </div>
             </div>
