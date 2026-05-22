@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import { Menu, X, LogIn, UserPlus, Sparkles, ChevronDown } from "lucide-react"
+import { Menu, X, LogIn, UserPlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { GemstoneLogo } from "@/components/gemstone-logo"
 
@@ -71,8 +71,8 @@ export function Navbar() {
                   size="sm" 
                   className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:opacity-90 rounded-full px-4 shadow-lg shadow-primary/25"
                 >
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Get Started
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Register
                 </Button>
               </Link>
             </div>
