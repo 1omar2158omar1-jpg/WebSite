@@ -77,27 +77,7 @@ export default function RegisterPage() {
               <p className="text-muted-foreground text-sm">Register a new user account</p>
             </div>
 
-            {/* Notice Box */}
-            <div className="glass rounded-xl p-4 mb-6 border border-yellow-500/20">
-              <div className="flex items-start gap-3 mb-4">
-                <AlertTriangle className="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" />
-                <div className="text-sm">
-                  <p className="text-yellow-500 font-medium">Your account will be created as <span className="text-yellow-400">inactive</span>.</p>
-                  <p className="text-muted-foreground mt-1">The account must be activated through any supported activation server.</p>
-                </div>
-              </div>
-              
-              <div className="mt-4 pt-4 border-t border-border/50 space-y-2">
-                <p className="text-sm text-primary flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-400" />
-                  Account will be created as inactive
-                </p>
-                <p className="text-sm text-muted-foreground flex items-center gap-2">
-                  <Check className="w-4 h-4 text-primary" />
-                  Must be activated through any server
-                </p>
-              </div>
-            </div>
+
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
