@@ -99,7 +99,7 @@ export default function ActivatePage() {
                     <div className="text-sm">
                       <p className="text-foreground font-medium mb-1">Serial Key Activation</p>
                       <p className="text-muted-foreground">
-                        Enter the serial key you received from an authorized reseller to activate your account and access all premium features.
+                        Enter your serial key to activate your account and access all premium features.
                       </p>
                     </div>
                   </div>
