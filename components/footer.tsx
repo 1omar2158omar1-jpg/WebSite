@@ -64,11 +64,7 @@ export function Footer() {
                   Contact Us
                 </Link>
               </li>
-              <li>
-                <Link href="/resellers" className="text-muted-foreground hover:text-primary transition-colors text-sm">
-                  Authorized Resellers
-                </Link>
-              </li>
+
             </ul>
           </div>
 

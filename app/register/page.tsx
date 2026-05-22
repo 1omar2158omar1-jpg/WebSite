@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { User, Mail, Lock, UserPlus, AlertTriangle, ExternalLink, Check } from "lucide-react"
+import { User, Mail, Lock, UserPlus, AlertTriangle, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -84,13 +84,8 @@ export default function RegisterPage() {
                 <div className="text-sm">
                   <p className="text-yellow-500 font-medium">Your account will be created as <span className="text-yellow-400">inactive</span>.</p>
                   <p className="text-muted-foreground mt-1">The account must be activated through any supported activation server.</p>
-                  <p className="text-muted-foreground mt-1">To purchase activation, please visit the Authorized Resellers page:</p>
                 </div>
               </div>
-              <Link href="/resellers" className="flex items-center gap-2 text-primary hover:underline text-sm">
-                <ExternalLink className="w-4 h-4" />
-                Open Resellers Page
-              </Link>
               
               <div className="mt-4 pt-4 border-t border-border/50 space-y-2">
                 <p className="text-sm text-primary flex items-center gap-2">
@@ -101,13 +96,6 @@ export default function RegisterPage() {
                   <Check className="w-4 h-4 text-primary" />
                   Must be activated through any server
                 </p>
-                <p className="text-sm text-muted-foreground flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-400" />
-                  Visit resellers page to purchase activation
-                </p>
-                <Link href="/resellers" className="text-sm text-green-400 hover:underline">
-                  Resellers Page
-                </Link>
               </div>
             </div>
 

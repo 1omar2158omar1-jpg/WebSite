@@ -50,7 +50,6 @@ export function Navbar() {
                 <NavLink href="/">Home</NavLink>
                 <NavLink href="/features">Features</NavLink>
                 <NavLink href="/pricing">Pricing</NavLink>
-                <NavLink href="/resellers">Resellers</NavLink>
               </div>
             </div>
 
@@ -94,7 +93,6 @@ export function Navbar() {
               <MobileNavLink href="/" onClick={() => setIsMenuOpen(false)}>Home</MobileNavLink>
               <MobileNavLink href="/features" onClick={() => setIsMenuOpen(false)}>Features</MobileNavLink>
               <MobileNavLink href="/pricing" onClick={() => setIsMenuOpen(false)}>Pricing</MobileNavLink>
-              <MobileNavLink href="/resellers" onClick={() => setIsMenuOpen(false)}>Resellers</MobileNavLink>
               <div className="flex gap-2 pt-4 mt-2 border-t border-border/50">
                 <Link href="/login" className="flex-1">
                   <Button variant="outline" className="w-full rounded-full border-primary/50 text-primary">
