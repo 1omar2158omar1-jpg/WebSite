@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
-import { createUser, findUserByEmail, findUserByUsername } from "@/lib/db"
+import { 
+  createUser, 
+  findUserByEmail, 
+  findUserByUsername, 
+  getSetting, 
+  getTrialPlan, 
+  createSubscription,
+  updateUserStatus
+} from "@/lib/db"
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,15 +47,36 @@ export async function POST(request: NextRequest) {
     // Create user
     const userId = await createUser(username, email, hashedPassword)
 
+    // Check if auto-trial is enabled
+    let autoTrialApplied = false
+    try {
+      const autoTrialEnabled = await getSetting("auto_trial_enabled")
+      const autoTrialDays = await getSetting("auto_trial_days")
+
+      if (autoTrialEnabled === "true" && autoTrialDays) {
+        const trialPlan = await getTrialPlan()
+        if (trialPlan) {
+          await createSubscription(userId, trialPlan.id, null, parseInt(autoTrialDays), true)
+          await updateUserStatus(userId, "active")
+          autoTrialApplied = true
+        }
+      }
+    } catch {
+      // Settings table might not exist yet, continue without auto-trial
+    }
+
     return NextResponse.json({
       success: true,
-      message: "Account created successfully",
+      message: autoTrialApplied 
+        ? "Account created with trial subscription!" 
+        : "Account created successfully",
       user: {
         id: userId,
         username,
         email,
-        status: "inactive",
+        status: autoTrialApplied ? "active" : "inactive",
       },
+      autoTrial: autoTrialApplied,
     })
   } catch (error) {
     console.error("Registration error:", error)
