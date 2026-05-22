@@ -1,7 +1,7 @@
 import { ParticleBackground } from "@/components/particle-background"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { Cloud, Smartphone, HardDrive, RefreshCw, Headphones, Sparkles } from "lucide-react"
+import { Cloud, Smartphone, RefreshCw, Headphones, Sparkles } from "lucide-react"
 
 const features = [
   {
@@ -16,12 +16,7 @@ const features = [
     titleEn: "Supports Latest iOS Versions",
     description: "Professional support guaranteed with regular updates for the latest iOS releases.",
   },
-  {
-    icon: HardDrive,
-    title: "بدون فقد بيانات الجهاز",
-    titleEn: "No Data Loss",
-    description: "Professional support guaranteed with regular updates for the latest iOS releases.",
-  },
+
   {
     icon: RefreshCw,
     title: "تحديثات دورية مجانية",

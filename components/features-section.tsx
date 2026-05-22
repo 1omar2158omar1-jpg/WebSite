@@ -1,4 +1,4 @@
-import { Cloud, Smartphone, HardDrive, RefreshCw, Headphones, Sparkles } from "lucide-react"
+import { Cloud, Smartphone, RefreshCw, Headphones, Sparkles } from "lucide-react"
 
 const features = [
   {
@@ -13,12 +13,7 @@ const features = [
     titleEn: "Latest iOS Support",
     description: "Professional support guaranteed with regular updates for the latest iOS releases.",
   },
-  {
-    icon: HardDrive,
-    title: "بدون فقد البيانات",
-    titleEn: "No Data Loss",
-    description: "Professional support guaranteed with regular updates for the latest iOS releases.",
-  },
+
   {
     icon: RefreshCw,
     title: "تحديثات مجانية",
