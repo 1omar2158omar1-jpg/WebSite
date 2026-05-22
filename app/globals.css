@@ -82,9 +82,8 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', 'Noto Sans Arabic', 'Inter Fallback', system-ui, sans-serif;
+  --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
-  --font-arabic: 'Noto Sans Arabic', 'Inter', system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

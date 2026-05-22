@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Geist_Mono, Noto_Sans_Arabic } from 'next/font/google'
+import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -11,11 +11,6 @@ const inter = Inter({
 const geistMono = Geist_Mono({ 
   subsets: ["latin"],
   variable: '--font-mono'
-});
-
-const notoArabic = Noto_Sans_Arabic({
-  subsets: ["arabic"],
-  variable: '--font-arabic'
 });
 
 export const metadata: Metadata = {
@@ -48,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark bg-background">
-      <body className={`${inter.variable} ${geistMono.variable} ${notoArabic.variable} font-sans antialiased min-h-screen bg-background`}>
+      <body className={`${inter.variable} ${geistMono.variable} font-sans antialiased min-h-screen bg-background`}>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
